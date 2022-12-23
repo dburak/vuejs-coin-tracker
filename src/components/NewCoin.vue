@@ -15,7 +15,7 @@ export default {
         quantity: quantity,
         isAdded: true,
       });
-      this.$emit('reload')
+      this.$emit('reloadParent')
     },
   },
   data: () => ({

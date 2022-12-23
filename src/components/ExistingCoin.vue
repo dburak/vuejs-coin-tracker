@@ -9,13 +9,18 @@ export default {
   methods: {
     ...mapActions(['deleteCoin', 'updateCoin']),
     onRemoveClick() {
-      this.deleteCoin(this.symbol);
+      this.deleteCoin({
+        symbol: this.symbol,
+        lastPrice: this.lastPrice
+      });
+      this.$emit('reloadParent')
     },
     onUpdateClick(){
       this.updateCoin({
         symbol: this.symbol,
         quantity: this.dataCount
       });
+      this.$emit('reloadParent')
     }
   },
   data: () => ({

@@ -1,16 +1,15 @@
-<!-- eslint-disable no-unused-vars -->
 <script>
 import { mapGetters, mapActions } from 'vuex';
 export default {
-  methods: {
-    ...mapActions(['fetchCoins']),
-    reloadParent() {
-      this.renderKey++;
-    }
-  },
   components: {
     NewCoin: () => import('./NewCoin.vue'),
     ExistingCoin: () => import('./ExistingCoin.vue'),
+  },
+  methods: {
+    ...mapActions(['fetchCoins']),
+    reload() {
+      this.renderKey++;
+    },
   },
   data() {
     return {
@@ -21,7 +20,7 @@ export default {
   },
   computed: {
     filteredCoins() {
-      this.renderKey
+      this.renderKey;
       return this.coinsList.filter((item) => {
         return (
           item.symbol.toLowerCase().indexOf(this.search.toLowerCase()) > -1
@@ -46,10 +45,24 @@ export default {
           <div class="text-center">
             <v-dialog v-model="dialog" width="1200">
               <template v-slot:activator="{ on, attrs }">
-                <v-btn v-if="userCoinsList.length" color="primary" dark v-bind="attrs" v-on="on">
+                <v-btn
+                  v-on:click="reload()"
+                  v-if="userCoinsList.length"
+                  color="primary"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
+                >
                   Add / Update
                 </v-btn>
-                <v-btn v-else color="primary" dark v-bind="attrs" v-on="on">
+                <v-btn
+                  v-on:click="reload()"
+                  v-else
+                  color="primary"
+                  dark
+                  v-bind="attrs"
+                  v-on="on"
+                >
                   Add Stock
                 </v-btn>
               </template>
@@ -67,19 +80,18 @@ export default {
                   <ul>
                     <li v-for="coin in filteredCoins" :key="coin.symbol">
                       <ExistingCoin
+                        @reloadParent="reload"
                         :symbol="coin.symbol"
                         :last-price="coin.lastPrice"
                         :quantity="coin.quantity"
                         v-if="coin.isAdded"
                       />
-                      <NewCoin 
-                        @reload="reloadParent"
+                      <NewCoin
+                        @reloadParent="reload"
                         :symbol="coin.symbol"
                         :last-price="coin.lastPrice"
                         v-else
-                        
                       />
-                      
                     </li>
                   </ul>
                 </v-card>

@@ -20,8 +20,8 @@ const actions = {
   addCoins({ commit }, coin) {
     commit('setNewCoin', coin);
   },
-  deleteCoin({commit}, symbol) {
-    commit('setDeletedCoin', symbol);
+  deleteCoin({commit}, deleteObject) {
+    commit('setDeletedCoin', deleteObject);
   },
   updateCoin({commit}, updateObject) {
     commit('setUpdatedCoin', updateObject);
@@ -35,9 +35,14 @@ const mutations = {
     const index = state.coins.findIndex(item => item.symbol == coin.symbol)
     state.coins[index] = coin;
   },
-  setDeletedCoin: (state, title) => (
-    state.userCoins = state.userCoins.filter(item => item.symbol != title)
-  ),
+  setDeletedCoin: (state, deleteObject) => {
+
+    const index = state.coins.findIndex(item => item.symbol == deleteObject.symbol)
+    state.coins[index] = deleteObject;
+
+    state.userCoins = state.userCoins.filter(item => item.symbol != deleteObject.symbol)
+  }
+  ,
   setUpdatedCoin: (state,updateObject) => {
 
     const index = state.userCoins.findIndex(item => item.symbol == updateObject.symbol)
