@@ -42,7 +42,7 @@ export default {
       <v-card-title primary-title> What would like to do ? </v-card-title>
       <v-card-actions>
         <template>
-          <div class="text-center">
+          <div class="text-center">         
             <v-dialog v-model="dialog" width="1200">
               <template v-slot:activator="{ on, attrs }">
                 <v-btn
@@ -65,6 +65,12 @@ export default {
                 >
                   Add Stock
                 </v-btn>
+                <v-btn
+                  class="refresh"
+                  v-on:click="reload()"
+                  color="primary"
+                  dark
+                >Refresh</v-btn>
               </template>
               <template>
                 <v-card>
@@ -90,6 +96,7 @@ export default {
                         @reloadParent="reload"
                         :symbol="coin.symbol"
                         :last-price="coin.lastPrice"
+                        :weighted-avg-price="coin.weightedAvgPrice"
                         v-else
                       />
                     </li>
@@ -117,5 +124,8 @@ export default {
 <style>
 ul {
   list-style: none;
+}
+.refresh {
+  margin-left: 1rem;
 }
 </style>

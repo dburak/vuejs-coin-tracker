@@ -33,7 +33,7 @@ const mutations = {
   setNewCoin: (state, coin) => {
     state.userCoins.unshift(coin)
     const index = state.coins.findIndex(item => item.symbol == coin.symbol)
-    state.coins[index] = coin;
+    state.coins[index] = coin
   },
   setDeletedCoin: (state, deleteObject) => {
 
@@ -48,6 +48,7 @@ const mutations = {
     const index = state.userCoins.findIndex(item => item.symbol == updateObject.symbol)
 
     state.userCoins[index].quantity = updateObject.quantity;
+
 
   }
 };

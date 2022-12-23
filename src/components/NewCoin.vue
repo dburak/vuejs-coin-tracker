@@ -4,6 +4,7 @@ export default {
   props: {
     symbol: String,
     lastPrice: String,
+    weightedAvgPrice: String
   },
   methods: {
     ...mapActions(['addCoins']),
@@ -12,6 +13,7 @@ export default {
       this.addCoins({
         symbol: this.symbol,
         lastPrice: this.lastPrice,
+        weightedAvgPrice: this.weightedAvgPrice,
         quantity: quantity,
         isAdded: true,
       });

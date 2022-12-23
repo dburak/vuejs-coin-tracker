@@ -4,6 +4,7 @@ export default {
   props: {
     symbol: String,
     lastPrice: String,
+    weightedAvgPrice: String,
     quantity: String
   },
   methods: {
@@ -33,8 +34,8 @@ export default {
       set(value) {
         this.$emit(value)
         this.dataCount = value;
-      }
-    }
+      },
+    },
   }
 };
 </script>
@@ -49,7 +50,8 @@ export default {
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>{{ symbol }}</v-list-item-title>
-            <v-list-item-subtitle>{{ lastPrice }}</v-list-item-subtitle>
+            <v-list-item-subtitle v-if="$props.weightedAvgPrice">{{ lastPrice }} - {{ weightedAvgPrice }}</v-list-item-subtitle>
+            <v-list-item-subtitle v-else>{{ lastPrice }}</v-list-item-subtitle>
           </v-list-item-content>
           <v-list-item-action>
             <v-col class="d-flex" cols="12" sm="4">
