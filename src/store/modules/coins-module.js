@@ -33,7 +33,7 @@ const actions = {
     const response = await axios.get(
       'https://api2.binance.com/api/v3/ticker/24hr'
     );
-    commit('setCoins', response.data.slice(0, 25));
+    commit('setCoins', response.data.slice(0, 100));
   },
   addCoins({ commit }, coin) {
     commit('setNewCoin', coin);

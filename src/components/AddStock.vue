@@ -10,6 +10,9 @@ export default {
     reload() {
       this.renderKey++;
     },
+    refreshComponent(){
+      //TODO: not completed yet
+    }
   },
   data() {
     return {
@@ -32,6 +35,9 @@ export default {
   },
   created() {
     this.fetchCoins();
+    setInterval(() => {
+    this.refreshComponent();
+  }, 1200000); //20 minutes
   },
 };
 </script>
