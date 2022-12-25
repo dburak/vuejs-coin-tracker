@@ -12,7 +12,6 @@ export default {
 
 <template>
   <div>
-    {{ userCoinsList }}
     <h1 class="usercoin usercoin--underlined">My Portfolio</h1>
     <h2 v-if="!userCoinsList.length" class="usercoin">You don't have any coin in your portfolio</h2>
     <ul>

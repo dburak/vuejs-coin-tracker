@@ -8,24 +8,21 @@
 
     <v-main>
       <AddStock />
-      <UserCoin />
-      <PieChart />
+      <CoinAndChartView />
     </v-main>
   </v-app>
 </template>
 
 <script>
 import AddStock from './components/AddStock';
-import UserCoin from './components/UserCoin';
-import PieChart from './components/PieChart';
+import CoinAndChartView from './components/CoinAndChartView'
 
 export default {
   name: 'App',
 
   components: {
     AddStock,
-    UserCoin,
-    PieChart
+    CoinAndChartView
   },
 
   data: () => ({

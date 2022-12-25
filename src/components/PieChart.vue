@@ -1,37 +1,40 @@
-<template>
-  <apexchart class="chart" type="pie" :options="options" :series="series" />
-</template>
-
 <script>
-import VueApexCharts from 'vue-apexcharts'
-
+import VueApexCharts from 'vue-apexcharts';
+import { mapGetters } from 'vuex';
 export default {
   components: {
-    apexchart: VueApexCharts
+    apexchart: VueApexCharts,
   },
-  data() {
-    return {
-      options: {
-        chart: {
-          width: 380,
-          type: 'pie',
-          offsetX: 1000,
-          offsetY: -150,
-        },
-        labels: ['Team A', 'Team B', 'Team C', 'Team D', 'Team E'],
-        legend: {
-          position: 'bottom',
-        }
+  data: () => ({
+    dataCount: []
+  }),
+  computed: {
+    ...mapGetters(['userCoinsList']),
+    ...mapGetters(['coinChartList']),
+    itemsCount: {
+      get() { return this.coinChartList[0].quantity },
+      set(value) {
+        this.$emit(value)
+        this.dataCount = value;
       },
-      series: [44, 55, 13, 43, 22],
-    }
-  }
-}
+    },
+  },
+};
 </script>
+<template>
+  <div>
+    <apexchart
+      class="chart"
+      type="pie"
+      :options="coinChartList[0].names[0].options"
+      :series="itemsCount"
+    />
+  </div>
+</template>
 
 <style>
-  @import 'apexcharts/dist/apexcharts.css';
-  .chart {
-    max-width: 500px;
-  }
+@import 'apexcharts/dist/apexcharts.css';
+.chart {
+  max-width: 500px;
+}
 </style>
